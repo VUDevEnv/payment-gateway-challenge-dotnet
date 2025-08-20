@@ -1,0 +1,11 @@
+﻿global using AutoMapper;
+global using FluentAssertions;
+global using Moq;
+global using Microsoft.Extensions.Logging;
+global using PaymentGateway.Application.DTOs.Enums;
+global using PaymentGateway.Application.DTOs.Requests;
+global using PaymentGateway.Application.DTOs.Responses;
+global using PaymentGateway.Application.Services;
+global using PaymentGateway.Domain.Enums;
+global using PaymentGateway.Domain.Entities;
+global using PaymentGateway.Domain.Interfaces.Repositories;
