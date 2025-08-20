@@ -5,9 +5,17 @@ This is the .NET version of the Payment Gateway challenge. If you haven't alread
 ## Template structure
 ```
 src/
-    PaymentGateway.Api - a skeleton ASP.NET Core Web API
+    PaymentGateway.Api 
+    PaymentGateway.Application
+    PaymentGateway.Domain
+    PaymentGateway.Infrastructure
+
 test/
-    PaymentGateway.Api.Tests - an empty xUnit test project
+    PaymentGateway.Api.IntegrationTests
+    PaymentGateway.Application.UnitTests
+    PaymentGateway.Architecture.Tests
+    PaymentGateway.Infrastructure.UnitTests
+
 imposters/ - contains the bank simulator configuration. Don't change this
 
 .editorconfig - don't change this. It ensures a consistent set of rules for submissions when reformatting code
@@ -38,7 +46,7 @@ The project follows **Clean Architecture** to enforce separation of concerns, en
 - **API Layer**: Contains all controllers and API endpoints. It exposes the API surface and handles HTTP requests.
 - **Application Layer**: Contains business logic and application services. This layer coordinates interactions between the domain and infrastructure.
 - **Domain Layer**: The core of the system, including business entities, domain models, domain services, value objects, and business rules.
-- **Infrastructure Layer**: Provides the actual implementation for external services like databases, message queues, file storage, and payment processors.
+- **Infrastructure Layer**: Provides the actual implementation for external services like databases, message queues, file storage, payment processors, and external APIs.
 
 ### 2. **Payment Entity**
 
