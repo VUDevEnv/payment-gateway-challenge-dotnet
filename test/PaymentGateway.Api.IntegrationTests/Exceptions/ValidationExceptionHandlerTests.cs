@@ -7,8 +7,8 @@ namespace PaymentGateway.Api.IntegrationTests.Exceptions
     {
         private readonly HttpClient _client = factory.Client;
 
-        [Fact(DisplayName = "ValidationExceptionHandler When Card Name Validation Fails Should Return Problem Details")]
-        public async Task ValidationExceptionHandler_WhenCardNameValidationFails_ShouldReturnProblemDetails()
+        [Fact(DisplayName = "ValidationExceptionHandler When Card Number Validation Fails Should Return Problem Details")]
+        public async Task ValidationExceptionHandler_WhenCardNumberValidationFails_ShouldReturnProblemDetails()
         {
             // Arrange
             var paymentRequest = new PostPaymentRequest()
