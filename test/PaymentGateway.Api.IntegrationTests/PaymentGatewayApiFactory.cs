@@ -1,13 +1,18 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System.Text.RegularExpressions;
+
+using FluentValidation;
+
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
 using Moq;
+
+using PaymentGateway.Application.Constants;
 using PaymentGateway.Application.Interfaces;
 using PaymentGateway.Domain.Exceptions;
-using System.Text.RegularExpressions;
-using FluentValidation;
 
 namespace PaymentGateway.Api.IntegrationTests
 {
@@ -104,24 +109,24 @@ namespace PaymentGateway.Api.IntegrationTests
                         if (string.IsNullOrWhiteSpace(request.CardNumber) ||
                             !Regex.IsMatch(request.CardNumber, @"^\d{14,19}$"))
                         {
-                            throw new ValidationException("Card number must contain only numeric digits.");
+                            throw new ValidationException(ValidationMessages.CardNumberNumeric);
                         }
 
                         var now = DateTime.UtcNow;
                         if (request.ExpiryYear < now.Year ||
                             (request.ExpiryYear == now.Year && request.ExpiryMonth < now.Month))
                         {
-                            throw new ValidationException("Expiry year must be the current year or later.");
+                            throw new ValidationException(ValidationMessages.ExpiryYearTooEarly);
                         }
 
                         if (string.IsNullOrWhiteSpace(request.Cvv) || !Regex.IsMatch(request.Cvv, @"^\d{3}$"))
                         {
-                            throw new ValidationException("CVV must be 3 or 4 digits long.");
+                            throw new ValidationException(ValidationMessages.CvvLengthInvalid);
                         }
 
                         if (request.Amount <= 0)
                         {
-                            throw new ValidationException("Amount must be greater than zero.");
+                            throw new ValidationException(ValidationMessages.AmountMustBeGreaterThanZero);
                         }
 
                         if (request.CardNumber == "9999999999999999")
